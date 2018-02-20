@@ -14,3 +14,7 @@ docker-compose up
 go test
 
 ```
+
+Possible improvements:
+  * create a client/server with headers to indicate continuation token
+  * play around with isolation levels in postgres transactions to expose possible phantom or nonrepeatable read
