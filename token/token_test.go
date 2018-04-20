@@ -1,7 +1,6 @@
 package token
 
 import (
-	"log"
 	"testing"
 )
 
@@ -10,7 +9,6 @@ import (
 func TestToken(t *testing.T) {
 	k := NewToken()
 	t.Run("select", func(t *testing.T) {
-		log.Printf("SIMPLE SELECTION TEST")
 		k.createDB()
 		defer k.destroyDB()
 
@@ -27,9 +25,9 @@ func TestToken(t *testing.T) {
 			for _, d := range data {
 				counter[d.ID]++
 			}
-			log.Printf("%s", toJSON(data, token, newToken))
+			t.Logf("%s", toJSON(data, token, newToken))
 			if newToken == "" {
-				log.Printf("DONE! no more records")
+				t.Logf("DONE! no more records")
 				break
 			}
 			token = newToken
@@ -39,7 +37,6 @@ func TestToken(t *testing.T) {
 		}
 	})
 	t.Run("select with updated records", func(t *testing.T) {
-		log.Printf("SELECTION WITH UPDATES TEST")
 		k.createDB()
 		defer k.destroyDB()
 
@@ -56,9 +53,9 @@ func TestToken(t *testing.T) {
 			for _, d := range data {
 				counter[d.ID]++
 			}
-			log.Printf("%s", toJSON(data, token, newToken))
+			t.Logf("%s", toJSON(data, token, newToken))
 			if newToken == "" {
-				log.Printf("DONE! no more records")
+				t.Logf("DONE! no more records")
 				break
 			}
 			// save the last token
@@ -67,7 +64,7 @@ func TestToken(t *testing.T) {
 		// go update a record
 		updatedRecord := 3
 		updatedData := "new hotness"
-		log.Printf("UPDATING RECORD %d with %s", updatedRecord, updatedData)
+		t.Logf("UPDATING RECORD %d with %s", updatedRecord, updatedData)
 		k.updateData(updatedRecord, updatedData)
 		// now select again
 		for {
@@ -75,9 +72,9 @@ func TestToken(t *testing.T) {
 			for _, d := range data {
 				counter[d.ID]++
 			}
-			log.Printf("%s", toJSON(data, token, newToken))
+			t.Logf("%s", toJSON(data, token, newToken))
 			if newToken == "" {
-				log.Printf("DONE! no more records")
+				t.Logf("DONE! no more records")
 				break
 			}
 			token = newToken
@@ -97,7 +94,6 @@ func TestToken(t *testing.T) {
 		}
 	})
 	t.Run("select with new records", func(t *testing.T) {
-		log.Printf("SELECTION WITH NEW RECORDS TEST")
 		k.createDB()
 		defer k.destroyDB()
 
@@ -115,12 +111,12 @@ func TestToken(t *testing.T) {
 				counter[d.ID]++
 			}
 			if newToken == "" {
-				log.Printf("DONE! no more records")
+				t.Logf("DONE! no more records")
 				break
 			}
 			token = newToken
 		}
-		log.Printf("making %d more records", records)
+		t.Logf("making %d more records", records)
 		// go make some records
 		for i := 0; i < records; i++ {
 			k.insertData("", 0)
@@ -131,9 +127,9 @@ func TestToken(t *testing.T) {
 			for _, d := range data {
 				counter[d.ID]++
 			}
-			log.Printf("%s", toJSON(data, token, newToken))
+			t.Logf("%s", toJSON(data, token, newToken))
 			if newToken == "" {
-				log.Printf("DONE! no more records")
+				t.Logf("DONE! no more records")
 				break
 			}
 			token = newToken
