@@ -15,7 +15,6 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("DEBUG %#v\n", kh)
-	fmt.Printf("DEBUG ks %#v\n", kh.ks)
 
 	a, err := aead.New(kh)
 	if err != nil {
