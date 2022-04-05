@@ -7,6 +7,7 @@ import (
 // TestToken tests some implementations of selecting records with a token
 // each record should be returned to client at least once (dups are ok)
 func TestToken(t *testing.T) {
+	t.Skip()
 	k := NewToken()
 	t.Run("select", func(t *testing.T) {
 		k.createDB()
