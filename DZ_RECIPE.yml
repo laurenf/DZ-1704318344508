@@ -1,0 +1,10 @@
+dev:
+  commands:
+  - command: go mod download
+    directory: fungo
+    name: install cmd
+  name: ""
+  packages:
+  - nixpkgs.go
+  repos:
+  - https://github.com/cmiller01/fungo
